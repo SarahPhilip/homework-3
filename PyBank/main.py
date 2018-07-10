@@ -34,12 +34,12 @@ with open(csvpath, 'r') as csvfile:
 		last_amount = this_amount
 
 # The greatest increase in profits (date and amount) over the entire period
-		if this_amount > greatest_increase_val:
-			greatest_increase_val = this_amount
+		if change > greatest_increase_val:
+			greatest_increase_val = change
 			greatest_increase_date = this_date
 # The greatest decrease in losses (date and amount) over the entire period
-		elif this_amount < greatest_decrease_val:
-			greatest_decrease_val = this_amount
+		elif change < greatest_decrease_val:
+			greatest_decrease_val = change
 			greatest_decrease_date = this_date
 
 avg_change = round(net_change / (num_months - 1),2)		
