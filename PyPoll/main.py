@@ -2,41 +2,44 @@ import csv
 from collections import Counter
 
 csvpath = "election_data.csv"
+title = "Election Results"
 total_votes = 0
 candidate_list = []
-total_votes =[]
 first_row = True
+votes = 0
 with open(csvpath, 'r') as csvfile:
 	csvreader = csv.reader(csvfile, delimiter = '\n')
 	csv_header = next(csvfile)
 	for row in csvreader:
-
-
-
-# A complete list of candidates who received votes
 #Separate the Voter ID,County and Candidate
 		this_row = row[0].split(",")
-		candidate_name = this_row[2]
-		total_votes.append(candidate_name)
-		if first_row is True:
-			candidate_list.append(candidate_name)
-			first_row = False
-		
-		if candidate_name not in candidate_list:
-			candidate_list.append(candidate_name)
+		candidate_list.append(this_row[2])
+vote_counter = Counter(candidate_list)
+total_votes = sum(vote_counter.values())
+print(title)
+print ("-"* 25)
+print("Total Votes : " + str(total_votes))
+print ("-"* 25)
+for key, value in vote_counter.items():
+	print("{}: {}% ({})".format(key, round((value/total_votes*100),3), value))
+	if votes < value:
+		winner = key
+		votes = value
+print ("-"* 25)
+print("Winner : " + winner)
+print ("-"* 25)
 
-# The percentage of votes each candidate won
-# print(type(Counter(candidate_vote)))
-####### use dictionary
-vote_counter = Counter(total_votes)
-print(vote_counter)
-print(list(vote_counter))
-# The total number of votes cast
-total_votes_counter = sum(vote_counter.values())
+output_file = "output.txt"
+with open(output_file, 'w', newline = "") as datafile:
+	writer = csv.writer(datafile)
+	writer.writerow([title])
+	writer.writerow(["-"* 25])
+	writer.writerow(["Total Votes : " + str(total_votes)])
+	writer.writerow(["-"* 25])
+	for key, value in vote_counter.items():
+		writer.writerow(["{}: {}% ({})".format(key, round((value/total_votes*100),3), value)])
+	writer.writerow(["-"* 25])
+	writer.writerow(["Winner : " + winner])
+	writer.writerow(["-"* 25])
 
-# The total number of votes each candidate won
-# The winner of the election based on popular vote.
-print("Election Results")
-print ("----------------------")
-print("Total Votes : " + str(total_votes_counter))
-print ("----------------------")
+
