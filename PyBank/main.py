@@ -45,22 +45,21 @@ with open(csvpath, 'r') as csvfile:
 avg_change = round(net_change / (num_months - 1),2)		
 
 output_file = "output.txt"
-with open(output_file, 'w') as datafile:
-	writer = csv.writer(datafile)
-	writer.writerow(["Financial Analysis"])
-	writer.writerow([("------------------")])
-	writer.writerow(["Total months : " , str(num_months)])
-	writer.writerow(["Net Amount : " , str(net_amount)])
-	writer.writerow(["Average Change : " , str(avg_change)])
-	writer.writerow(["Greatest Increase in Profits :" + str(greatest_increase_date) + " (" + str(greatest_increase_val) + ")"])
-	writer.writerow(["Greatest Decrease in Profits :" + str(greatest_decrease_date) + " (" + str(greatest_decrease_val) + ")"])
+with open(output_file, 'w') as textfile:
+	textfile.write("Financial Analysis \n")
+	textfile.write(("-" * 25 + "\n"))
+	textfile.write("Total months : " + str(num_months) + "\n")
+	textfile.write("Net Amount : " + str(net_amount) + "\n")
+	textfile.write("Average Change : $" + str(avg_change) + "\n")
+	textfile.write("Greatest Increase in Profits :" + str(greatest_increase_date) + " (" + str(greatest_increase_val) + ")\n")
+	textfile.write("Greatest Decrease in Profits :" + str(greatest_decrease_date) + " (" + str(greatest_decrease_val) + ")\n")
 
 
 print("Financial Analysis")
-print ("-----------------")
+print ("-" *25)
 print("Total months : " + str(num_months))
 print("Net Amount : " + str(net_amount))
-print("Average Change : " + str(avg_change))
+print("Average Change : $" + str(avg_change))
 print("Greatest Increase in Profits :" + str(greatest_increase_date) + " (" + str(greatest_increase_val) + ")")
 print("Greatest Decrease in Profits :" + str(greatest_decrease_date) + " (" + str(greatest_decrease_val) + ")")
 
