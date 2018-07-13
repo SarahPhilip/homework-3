@@ -15,6 +15,7 @@ with open(csvpath, 'r') as csvfile:
 		this_row = row[0].split(",")
 		candidate_list.append(this_row[2])
 vote_counter = Counter(candidate_list)
+#Total no. of votes
 total_votes = sum(vote_counter.values())
 print(title)
 print ("-"* 25)
